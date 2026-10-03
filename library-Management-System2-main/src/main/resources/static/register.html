@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create account — Harvard International Library</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="auth-wrap">
+    <div class="auth-side">
+        <div class="mark">L</div>
+        <h1>Join the library in under a minute.</h1>
+        <p>Create your student account to search the catalog, request books,
+        track due dates and manage fines — all in one place.</p>
+    </div>
+    <div class="auth-form-side">
+        <a href="index.html" class="back-home-link">← Back to home</a>
+        <div class="auth-box">
+            <h2>Student sign up</h2>
+            <div class="sub">New accounts are created with the Student role</div>
+
+            <div class="auth-error" id="error-box"></div>
+
+            <form id="register-form">
+                <div class="field">
+                    <label for="name">Full name</label>
+                    <input type="text" id="name" required placeholder="Rahul Sharma">
+                </div>
+                <div class="field">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required placeholder="you@example.com">
+                </div>
+                <div class="field">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" required minlength="6" placeholder="At least 6 characters">
+                </div>
+                <div class="field-row">
+                    <div class="field">
+                        <label for="mobile">Mobile</label>
+                        <input type="text" id="mobile" placeholder="98XXXXXXXX">
+                    </div>
+                    <div class="field">
+                        <label for="enrollmentNumber">Enrollment number</label>
+                        <input type="text" id="enrollmentNumber" placeholder="2026CS1025">
+                    </div>
+                </div>
+                <div class="field-row">
+                    <div class="field">
+                        <label for="department">Department</label>
+                        <input type="text" id="department" placeholder="Computer Science">
+                    </div>
+                    <div class="field">
+                        <label for="course">Course</label>
+                        <input type="text" id="course" placeholder="B.Tech">
+                    </div>
+                </div>
+                <div class="field-row">
+                    <div class="field">
+                        <label for="year">Year</label>
+                        <input type="number" id="year" min="1" max="6" placeholder="4">
+                    </div>
+                    <div class="field">
+                        <label for="semester">Semester</label>
+                        <input type="number" id="semester" min="1" max="12" placeholder="7">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width:100%;" id="submit-btn">Create account</button>
+            </form>
+
+            <p style="margin-top:18px; font-size:13.5px;">
+                Already have an account? <a href="login.html">Sign in</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+<script src="js/api.js"></script>
+<script>
+    const form = document.getElementById('register-form');
+    const errorBox = document.getElementById('error-box');
+    const submitBtn = document.getElementById('submit-btn');
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        errorBox.style.display = 'none';
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Creating account…';
+
+        const payload = {
+            name: document.getElementById('name').value.trim(),
+            email: document.getElementById('email').value.trim(),
+            password: document.getElementById('password').value,
+            mobile: document.getElementById('mobile').value.trim(),
+            enrollmentNumber: document.getElementById('enrollmentNumber').value.trim(),
+            department: document.getElementById('department').value.trim(),
+            course: document.getElementById('course').value.trim(),
+            year: document.getElementById('year').value ? Number(document.getElementById('year').value) : null,
+            semester: document.getElementById('semester').value ? Number(document.getElementById('semester').value) : null
+        };
+
+        try {
+            const auth = await LMS.post('/api/auth/register', payload);
+            LMS.saveSession(auth);
+            window.location.href = LMS.homeForRole(auth.role);
+        } catch (err) {
+            errorBox.textContent = err.message || 'Registration failed';
+            errorBox.style.display = 'block';
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Create account';
+        }
+    });
+</script>
+</body>
+</html>

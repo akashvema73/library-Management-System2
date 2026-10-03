@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reports — Harvard International Library </title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="app-shell">
+    <aside class="sidebar" id="lms-sidebar-slot"></aside>
+    <main class="main">
+        <div class="topbar">
+            <div>
+                <div class="eyebrow" id="page-eyebrow">Librarian</div>
+                <h1>Reports</h1>
+            </div>
+        </div>
+
+        <div class="stat-grid">
+            <div class="stat-card"><div class="label">Total books</div><div class="value" id="r-total-books">—</div></div>
+            <div class="stat-card"><div class="label">Issued books</div><div class="value accent" id="r-issued">—</div></div>
+            <div class="stat-card"><div class="label">Returned books</div><div class="value" id="r-returned">—</div></div>
+            <div class="stat-card"><div class="label">Overdue books</div><div class="value danger" id="r-overdue">—</div></div>
+            <div class="stat-card"><div class="label">Total students</div><div class="value" id="r-students">—</div></div>
+            <div class="stat-card"><div class="label">Fine collected</div><div class="value success" id="r-fine">—</div></div>
+        </div>
+
+        <div class="field-row" style="align-items:start;">
+            <div class="card">
+                <h3>Most borrowed books</h3>
+                <table>
+                    <thead><tr><th>Book</th><th>Times borrowed</th></tr></thead>
+                    <tbody id="report-books"><tr class="empty-row"><td colspan="2">Loading…</td></tr></tbody>
+                </table>
+            </div>
+            <div class="card">
+                <h3>Most active students</h3>
+                <table>
+                    <thead><tr><th>Student</th><th>Books borrowed</th></tr></thead>
+                    <tbody id="report-students"><tr class="empty-row"><td colspan="2">Loading…</td></tr></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="field-row" style="align-items:start;">
+            <div class="card">
+                <h3>Category-wise borrowing</h3>
+                <table>
+                    <thead><tr><th>Category</th><th>Books borrowed</th></tr></thead>
+                    <tbody id="report-category"><tr class="empty-row"><td colspan="2">Loading…</td></tr></tbody>
+                </table>
+            </div>
+            <div class="card">
+                <h3>Department-wise borrowing</h3>
+                <table>
+                    <thead><tr><th>Department</th><th>Books borrowed</th></tr></thead>
+                    <tbody id="report-department"><tr class="empty-row"><td colspan="2">Loading…</td></tr></tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/reports-view.js"></script>
+</body>
+</html>

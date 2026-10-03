@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — Harvard International Library</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="app-shell">
+    <aside class="sidebar" id="lms-sidebar-slot"></aside>
+    <main class="main">
+        <div class="topbar">
+            <div>
+                <div class="eyebrow">Admin</div>
+                <h1>System overview</h1>
+            </div>
+            <div class="page-actions">
+                <a href="admin-librarians.html" class="btn btn-outline">Manage librarians</a>
+                <a href="admin-books.html" class="btn btn-accent">Manage books</a>
+            </div>
+        </div>
+
+        <div class="stat-grid">
+            <div class="stat-card"><div class="label">Total students</div><div class="value" id="s-students">—</div></div>
+            <div class="stat-card"><div class="label">Total librarians</div><div class="value" id="s-librarians">—</div></div>
+            <div class="stat-card"><div class="label">Total books</div><div class="value" id="s-books">—</div></div>
+            <div class="stat-card"><div class="label">Total copies</div><div class="value" id="s-copies">—</div></div>
+            <div class="stat-card"><div class="label">Books issued</div><div class="value accent" id="s-issued">—</div></div>
+            <div class="stat-card"><div class="label">Overdue books</div><div class="value danger" id="s-overdue">—</div></div>
+            <div class="stat-card"><div class="label">Pending requests</div><div class="value accent" id="s-pending">—</div></div>
+            <div class="stat-card"><div class="label">Fine collected</div><div class="value success" id="s-fine">—</div></div>
+        </div>
+
+        <div class="card">
+            <div class="card-head">
+                <h2>Quick links</h2>
+            </div>
+            <div class="page-actions">
+                <a href="admin-students.html" class="btn btn-outline">View students</a>
+                <a href="admin-issues.html" class="btn btn-outline">Issues & returns</a>
+                <a href="admin-fines.html" class="btn btn-outline">Fine management</a>
+                <a href="admin-reports.html" class="btn btn-outline">Reports</a>
+            </div>
+        </div>
+    </main>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/admin-dashboard.js"></script>
+</body>
+</html>

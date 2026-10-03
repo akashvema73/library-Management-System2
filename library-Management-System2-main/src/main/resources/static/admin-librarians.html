@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Librarians — Harvard International Library</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="app-shell">
+    <aside class="sidebar" id="lms-sidebar-slot"></aside>
+    <main class="main">
+        <div class="topbar">
+            <div>
+                <div class="eyebrow">Admin</div>
+                <h1>Librarians</h1>
+            </div>
+            <div class="page-actions">
+                <button class="btn btn-accent" id="add-librarian-btn">Add librarian</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>Name</th><th>Email</th><th>Mobile</th><th>Status</th></tr>
+                    </thead>
+                    <tbody id="librarians-body">
+                        <tr class="empty-row"><td colspan="4">Loading…</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+</div>
+
+<div class="modal-backdrop" id="librarian-modal">
+    <div class="modal">
+        <div class="modal-head">
+            <h3>Add librarian</h3>
+            <button class="modal-close" id="librarian-modal-close">&times;</button>
+        </div>
+        <form id="librarian-form">
+            <div class="field"><label for="l-name">Full name</label><input type="text" id="l-name" required></div>
+            <div class="field"><label for="l-email">Email</label><input type="email" id="l-email" required></div>
+            <div class="field"><label for="l-password">Temporary password</label><input type="password" id="l-password" required minlength="6"></div>
+            <div class="field"><label for="l-mobile">Mobile</label><input type="text" id="l-mobile"></div>
+            <button type="submit" class="btn btn-primary" style="width:100%;">Create librarian account</button>
+        </form>
+    </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/admin-librarians.js"></script>
+</body>
+</html>

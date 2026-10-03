@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign in — Harvard International Library</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="auth-wrap">
+    <div class="auth-side">
+        <div class="mark">L</div>
+        <h1>Every book, tracked. Every due date, remembered.</h1>
+        <p>Harvard International Library 's library system for issuing, returning and reserving
+        books — built for students, librarians and administrators alike.</p>
+    </div>
+    <div class="auth-form-side">
+        <a href="index.html" class="back-home-link">← Back to home</a>
+        <div class="auth-box">
+            <h2>Sign in</h2>
+            <div class="sub">Use your library account to continue</div>
+
+            <div class="auth-error" id="error-box"></div>
+
+            <form id="login-form">
+                <div class="field">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required placeholder="you@example.com">
+                </div>
+                <div class="field">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width:100%;" id="submit-btn">Sign in</button>
+            </form>
+
+            <p style="margin-top:18px; font-size:13.5px;">
+                New student? <a href="register.html">Create an account</a>
+            </p>
+
+            <div class="auth-hint">
+                Demo accounts (seeded automatically) —<br>
+                Admin: <code>admin@library.com</code> / <code>admin123</code><br>
+                Librarian: <code>librarian@library.com</code> / <code>librarian123</code><br>
+                Student: <code>student@library.com</code> / <code>student123</code>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/api.js"></script>
+<script>
+    // If already logged in, go straight to the right dashboard.
+    (function () {
+        const user = LMS.getUser();
+        if (user && LMS.getToken()) {
+            window.location.href = LMS.homeForRole(user.role);
+        }
+    })();
+
+    const form = document.getElementById('login-form');
+    const errorBox = document.getElementById('error-box');
+    const submitBtn = document.getElementById('submit-btn');
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        errorBox.style.display = 'none';
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Signing in…';
+
+        try {
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const auth = await LMS.post('/api/auth/login', { email, password });
+            LMS.saveSession(auth);
+
+            const params = new URLSearchParams(window.location.search);
+            if (params.get('next') === 'books' && auth.role === 'STUDENT') {
+                const q = params.get('q') || '';
+                window.location.href = 'student-books.html' + (q ? ('?q=' + encodeURIComponent(q)) : '');
+            } else {
+                window.location.href = LMS.homeForRole(auth.role);
+            }
+        } catch (err) {
+            errorBox.textContent = err.message || 'Login failed';
+            errorBox.style.display = 'block';
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Sign in';
+        }
+    });
+</script>
+</body>
+</html>

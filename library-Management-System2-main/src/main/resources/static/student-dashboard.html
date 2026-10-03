@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — Harvard International Library </title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="app-shell">
+    <aside class="sidebar" id="lms-sidebar-slot"></aside>
+    <main class="main">
+        <div class="topbar">
+            <div>
+                <div class="eyebrow">Student</div>
+                <h1>Welcome back<span id="welcome-name"></span></h1>
+            </div>
+            <div class="page-actions">
+                <a href="student-books.html" class="btn btn-accent">Search books</a>
+            </div>
+        </div>
+
+        <div class="stat-grid">
+            <div class="stat-card">
+                <div class="label">Books issued</div>
+                <div class="value" id="stat-issued">—</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">Due soon</div>
+                <div class="value danger" id="stat-due-soon">—</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">Pending fine</div>
+                <div class="value accent" id="stat-fine">—</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-head">
+                <h2>My currently issued books</h2>
+                <a href="student-my-books.html" class="btn btn-outline btn-sm">View all</a>
+            </div>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr><th>Book</th><th>Issue date</th><th>Due date</th><th>Status</th></tr>
+                    </thead>
+                    <tbody id="recent-books-body">
+                        <tr class="empty-row"><td colspan="4">Loading…</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/student-dashboard.js"></script>
+</body>
+</html>

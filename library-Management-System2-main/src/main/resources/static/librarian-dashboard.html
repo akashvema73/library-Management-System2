@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — Harvard International Library </title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="app-shell">
+    <aside class="sidebar" id="lms-sidebar-slot"></aside>
+    <main class="main">
+        <div class="topbar">
+            <div>
+                <div class="eyebrow">Librarian</div>
+                <h1>Operational overview</h1>
+            </div>
+            <div class="page-actions">
+                <a href="librarian-requests.html" class="btn btn-accent">Review requests</a>
+            </div>
+        </div>
+
+        <div class="stat-grid">
+            <div class="stat-card"><div class="label">Total books</div><div class="value" id="s-books">—</div></div>
+            <div class="stat-card"><div class="label">Total students</div><div class="value" id="s-students">—</div></div>
+            <div class="stat-card"><div class="label">Books issued</div><div class="value accent" id="s-issued">—</div></div>
+            <div class="stat-card"><div class="label">Overdue books</div><div class="value danger" id="s-overdue">—</div></div>
+            <div class="stat-card"><div class="label">Pending requests</div><div class="value accent" id="s-pending">—</div></div>
+            <div class="stat-card"><div class="label">Fine collected</div><div class="value success" id="s-fine">—</div></div>
+        </div>
+
+        <div class="card">
+            <div class="card-head">
+                <h2>Pending issue requests</h2>
+                <a href="librarian-requests.html" class="btn btn-outline btn-sm">View all</a>
+            </div>
+            <div class="table-wrap">
+                <table>
+                    <thead><tr><th>Student</th><th>Book</th><th>Requested on</th><th></th></tr></thead>
+                    <tbody id="requests-body">
+                        <tr class="empty-row"><td colspan="4">Loading…</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/librarian-dashboard.js"></script>
+</body>
+</html>
